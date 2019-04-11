@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.entity">
+    <!--Increment由hibernate自动以递增的方式生成表识符，每次增量为1-->
+    <!--Identity由底层数据库生成表识符。条件是数据库支持自动增长数据类型-->
+    <!--SequenceHibernate根据底层数据库序列生成标识符。条件是数据库支持序列。-->
+    <!--Native根据底层数据库对自动生成表示符的能力来选择identity、sequence、hilo-->
+    <!--Assigned适用于自然主键。由java程序负责生成标识符。不能把setID()方法声明为Private的。尽量避免使用自然主键。-->
+
+    <class name="Role" table="role" >
+        <id name="rId" column="r_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="java.lang.String" column="r_name"/>
+
+        <set name="userSet" table="user_role">
+            <key column="r_id"></key>
+            <many-to-many class="User" column="u_id"></many-to-many>
+        </set>
+        <set name="menuSet" table="menu_role" cascade="all">
+            <key column="r_id"></key>
+            <many-to-many class="Menu" column="m_id"></many-to-many>
+        </set>
+    </class>
+
+</hibernate-mapping>

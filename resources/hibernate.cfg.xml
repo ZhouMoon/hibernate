@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings 数据库连接-->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/test</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">1234</property>
+
+        <!-- SQL dialect 方言 数据库的引擎-->
+        <!--org.hibernate.dialect.MySQL5InnoDBDialect事务会回滚-->
+        <!--org.hibernate.dialect.MySQL5Dialect   save保存会自动提交-->
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+
+        <!-- Echo all executed SQL to stdout执行打印SQL -->
+        <property name="show_sql">true</property>
+
+        <!-- 如果有就使用，没有就创建 -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Names the annotated entity class  配置映射文件-->
+        <mapping resource="com/hibernate/entity/User.hbm.xml"/>
+        <mapping resource="com/hibernate/entity/Role.hbm.xml"/>
+        <mapping resource="com/hibernate/entity/Menu.hbm.xml"/>
+
+
+
+        <!-- Names the annotated entity class  配置映射实体-->
+
+        <mapping class="com.hibernate.annotation.entity.Menu1"/>
+        <mapping class="com.hibernate.annotation.entity.Role1"/>
+        <mapping class="com.hibernate.annotation.entity.User1"/>
+
+
+    </session-factory>
+
+</hibernate-configuration>
